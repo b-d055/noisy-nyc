@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../static/normalize.css">
+  <link rel="stylesheet" href="../static/skeleton.css">
+  <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.css" />
+  <script src="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.js"></script>
+</head>
+<body>
+  <h3>Recent Noise Reports</h3>
+  <div id="map" style="height: 500px;"></div>
+  <script type="text/javascript">
+  // The first parameter are the coordinates of the center of the map
+  // The second parameter is the zoom level
+  var map = L.map('map').setView([40.712, -74.006], 11);
+
+  // {s}, {z}, {x} and {y} are placeholders for map tiles
+  // {x} and {y} are the x/y of where you are on the map
+  // {z} is the zoom level
+  // {s} is the subdomain of cartodb
+    var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+  });
+
+  // add the layer onto the map
+  map.addLayer(layer);
+  // adds popup
+  {%for complaint in complaints%}
+  L.marker([{{complaint.latitude}}, {{complaint.longitude}}]).addTo(map)
+    .bindPopup("<strong>{{complaint.descriptor}}, {{complaint.date}}</strong>").openPopup();
+  {%endfor%}
+</script>
+</body>
+</html>

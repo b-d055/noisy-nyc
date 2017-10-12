@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Noisy NYC</title>
+  <meta name="description" content="Find out which NYC nieighborhoods complain the most. Noisy NYC">
+  <meta name="author" content="b__d055">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../static/normalize.css">
+  <link rel="stylesheet" href="../static/skeleton.css">
+
+  <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../static/favicon.ico" type="image/x-icon">
+
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107208219-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)};
+    gtag('js', new Date());
+
+    gtag('config', 'UA-107208219-1');
+  </script>
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+        <h4>Noisy NYC</h4>
+        <p>Enter your zipcode below to find out how many complaints your neighbors file, relative to the rest of NYC.
+          <a href="/map" target="_blank">[view map]</a></p>
+        <form action="/" method="POST">
+          <div class="row">
+            <div class="u-full-width">
+              <label>Your zipcode</label>
+              <input class="u-full-width" type="text" placeholder="11201" name="zipcode">
+            </div>
+            <div class="u-full-width">
+              <input class="button-primary" type="submit" value="Search">
+            </div>
+        </form>
+      </div>
+      {% if results == True %}
+        <div class="row">
+          <h3>Grade</h3>
+          <h2>{{grade}}</h2>
+          <p>(A is the "best" and F is the "worst")</p>
+          <h3>Recent Complaints</h3>
+          <ul>
+            {% for complaint in complaints %}
+            <li>{{complaint}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      {% if error == True %}
+      <div class="row">
+        <h3>Error</h3>
+        <h2>{{error_code}}</h2>
+
+      </div>
+      {% endif %}
+      <div class="row">
+      <p>
+        Made with &#10084 in NYC by <a href="https://twitter.com/b__d055" target="_blank">b__d055
+        <br/>
+        <a href="/terms">TOS / Privacy</a>
+      </p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
